@@ -1,14 +1,46 @@
-// import React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+// import { Drawer } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
 function App() {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
   return (
-    <div className="bg-blue-500 text-3xl w-screen h-screen">
-      <h1>hello world</h1>
-      <div className="w-1/2 flex justify-center items-center  text-green-400">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-        obcaecati ipsam voluptatem, possimus vero, incidunt officia ipsa
-        provident ratione eaque impedit sequi consequuntur natus dignissimos
-        perferendis adipisci porro accusamus eligendi.
-      </div>
+    <div className=" w-screen h-screen flex justify-center items-center flex-col gap-5 ">
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        className="rounded-md border shadow text-xl text-yellow-300 bg-blue-500 flex justify-center items-center"
+      />
+      <Drawer>
+        <DrawerTrigger>
+          <Button>Open Drawer</Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+            <DrawerDescription>This action cannot be undone.</DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
